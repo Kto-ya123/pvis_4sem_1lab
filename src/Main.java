@@ -10,15 +10,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-import java.awt.*;
-
 
 public class Main {
 
     public static void main(String[] args) {
         Display display = new Display();
         Shell shell = new Shell(display);
-        shell.setText("Center");
+        shell.setText("Лабораторная работа 1");
         shell.setSize(450, 600);
 
         RowLayout rowLayout = new RowLayout(SWT.VERTICAL);
@@ -99,7 +97,6 @@ public class Main {
         Button thirdRadio = new Button(compositeRadioButton, SWT.RADIO);
         thirdRadio.setText("thirdRadio");
 
-
         Composite compositeFourthTask = new Composite(shell, SWT.NULL);
         compositeFourthTask.setLayout(rowLayoutCompositeThirdTask);
 
@@ -132,7 +129,7 @@ public class Main {
 
         Composite compositeFifthTask = new Composite(shell, SWT.NULL);
         RowLayout rowLayoutCompositeFifthTask = new RowLayout();
-        rowLayoutCompositeFifthTask.spacing = 100;
+        rowLayoutCompositeFifthTask.spacing = 30;
         compositeFifthTask.setLayout(rowLayoutCompositeFifthTask);
 
         Composite compositeAllButtonText = new Composite(compositeFifthTask, SWT.NULL);
@@ -158,8 +155,60 @@ public class Main {
         buttonFromSecondToFirst.setText("Из второго в первый");
         buttonFromSecondToFirst.setLayoutData(layoutForButtonFifthTask);
 
-        Table TableFifthTask = new Table(compositeFifthTask, SWT.NULL);
+        Table tableFifthTask = new Table(compositeFifthTask,SWT.MULTI
+                                        | SWT.BORDER | SWT.NO_SCROLL | SWT.FULL_SELECTION);
+        tableFifthTask.setLinesVisible(true);
+        RowData rowDataTableFifthTask = new RowData();
+        rowDataTableFifthTask.width = 200;
+        tableFifthTask.setLayoutData(rowDataTableFifthTask);
 
+        for(int i = 0; i < 2; i++){
+            TableColumn column = new TableColumn(tableFifthTask, SWT.NONE);
+            column.setText("                      ");
+
+
+        }
+        TableColumn [] tableColumns = tableFifthTask.getColumns();
+        for(int i = 0; i < 5; i++){
+            TableItem item = new TableItem(tableFifthTask, SWT.NONE);
+        }
+        for(int i = 0; i < 2; i++){
+            tableColumns[i].pack();
+        }
+
+        buttonTextToTable.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                String stringInput = textToTable.getText();
+                for(int i = tableFifthTask.getItemCount() - 1; i > 0; i--){
+                    TableItem item = tableFifthTask.getItem(i);
+                    TableItem prevItem = tableFifthTask.getItem(i - 1);
+                    item.setText(0, prevItem.getText(0));
+                    item.setText(1, prevItem.getText(1));
+                }
+                tableFifthTask.getItem(0).setText(stringInput);
+            }
+        });
+
+        buttonFromFirstToSecond.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                int index = tableFifthTask.getSelectionIndex();
+                TableItem item = tableFifthTask.getItem(index);
+                item.setText(1 , item.getText(0));
+                item.setText(0, "");
+            }
+        });
+
+        buttonFromSecondToFirst.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent e) {
+                int index = tableFifthTask.getSelectionIndex();
+                TableItem item = tableFifthTask.getItem(index);
+                item.setText(0 , item.getText(1));
+                item.setText(1, "");
+            }
+        });
 
         buttonChooseCheckBox.addSelectionListener(new SelectionAdapter() {
             @Override
