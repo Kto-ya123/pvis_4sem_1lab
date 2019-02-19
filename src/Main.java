@@ -160,7 +160,6 @@ public class Main {
 
         Table TableFifthTask = new Table(compositeFifthTask, SWT.NULL);
 
-
         buttonChooseCheckBox.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent arg0) {
