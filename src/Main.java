@@ -130,6 +130,37 @@ public class Main {
         Button checkBoxThird = new Button(compositeCheckBox, SWT.CHECK);
         checkBoxThird.setText("third");
 
+        Composite compositeFifthTask = new Composite(shell, SWT.NULL);
+        RowLayout rowLayoutCompositeFifthTask = new RowLayout();
+        rowLayoutCompositeFifthTask.spacing = 100;
+        compositeFifthTask.setLayout(rowLayoutCompositeFifthTask);
+
+        Composite compositeAllButtonText = new Composite(compositeFifthTask, SWT.NULL);
+        compositeAllButtonText.setLayout(new RowLayout(SWT.VERTICAL));
+
+        Text textToTable = new Text(compositeAllButtonText, SWT.BORDER);
+        RowData rowLayoutTextToTable = new RowData();
+        rowLayoutTextToTable.width = 150;
+        textToTable.setLayoutData(rowLayoutTextToTable);
+
+        Button buttonTextToTable = new Button(compositeAllButtonText, SWT.PUSH);
+        buttonTextToTable.setText("В таблицу");
+        RowData layoutForButtonFifthTask = new RowData();
+        layoutForButtonFifthTask.width = 160;
+        layoutForButtonFifthTask.height = 30;
+        buttonTextToTable.setLayoutData(layoutForButtonFifthTask);
+
+        Button buttonFromFirstToSecond = new Button(compositeAllButtonText, SWT.PUSH);
+        buttonFromFirstToSecond.setText("Из первого во второй");
+        buttonFromFirstToSecond.setLayoutData(layoutForButtonFifthTask);
+
+        Button buttonFromSecondToFirst = new Button(compositeAllButtonText, SWT.PUSH);
+        buttonFromSecondToFirst.setText("Из второго в первый");
+        buttonFromSecondToFirst.setLayoutData(layoutForButtonFifthTask);
+
+
+        Table TableFifthTask = new Table(compositeFifthTask, SWT.NULL);
+
         buttonChooseCheckBox.addSelectionListener(new SelectionAdapter() {
             @Override
             public void widgetSelected(SelectionEvent arg0) {
