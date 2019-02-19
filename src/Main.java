@@ -158,7 +158,6 @@ public class Main {
         buttonFromSecondToFirst.setText("Из второго в первый");
         buttonFromSecondToFirst.setLayoutData(layoutForButtonFifthTask);
 
-
         Table TableFifthTask = new Table(compositeFifthTask, SWT.NULL);
 
         buttonChooseCheckBox.addSelectionListener(new SelectionAdapter() {
