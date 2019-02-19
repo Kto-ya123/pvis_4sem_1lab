@@ -1,7 +1,4 @@
 import org.eclipse.swt.*;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -22,7 +19,7 @@ public class Main {
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setText("Center");
-        shell.setSize(450,600);
+        shell.setSize(450, 600);
 
         RowLayout rowLayout = new RowLayout(SWT.VERTICAL);
         rowLayout.marginLeft = 10;
@@ -48,7 +45,7 @@ public class Main {
         buttonInput.setText("add text");
 
         Text textOutput = new Text(compositeFirstTask, SWT.MULTI
-                                    | SWT.READ_ONLY | SWT.BORDER);
+            | SWT.READ_ONLY | SWT.BORDER);
         RowData layoutDataTextOutput = new RowData();
         layoutDataTextOutput.width = 100;
         textOutput.setLayoutData(layoutDataTextOutput);
@@ -102,7 +99,77 @@ public class Main {
         Button thirdRadio = new Button(compositeRadioButton, SWT.RADIO);
         thirdRadio.setText("thirdRadio");
 
-        //Button
+
+        Composite compositeFourthTask = new Composite(shell, SWT.NULL);
+        compositeFourthTask.setLayout(rowLayoutCompositeThirdTask);
+
+        Composite compositeButtonTextFourth = new Composite(compositeFourthTask, SWT.NULL);
+        compositeButtonTextFourth.setLayout(new RowLayout(SWT.VERTICAL));
+
+        Composite compositeCheckBox = new Composite(compositeFourthTask, SWT.NULL);
+        compositeCheckBox.setLayout(new RowLayout(SWT.VERTICAL));
+
+        Text textChooseCheckBox = new Text(compositeButtonTextFourth, SWT.BORDER);
+        RowData layoutDataTextChooseCheckBox = new RowData();
+        layoutDataTextChooseCheckBox.width = 150;
+        textChooseCheckBox.setLayoutData(layoutDataTextChooseCheckBox);
+
+        Button buttonChooseCheckBox = new Button(compositeButtonTextFourth, SWT.PUSH);
+        buttonChooseCheckBox.setText("Выбрать");
+        RowData layoutDataButtonChooseCheckBox = new RowData();
+        layoutDataButtonChooseCheckBox.height = 40;
+        layoutDataButtonChooseCheckBox.width = 100;
+        buttonChooseCheckBox.setLayoutData(layoutDataButtonChooseCheckBox);
+
+        Button checkBoxFirst = new Button(compositeCheckBox, SWT.CHECK);
+        checkBoxFirst.setText("first");
+
+        Button checkBoxSecond = new Button(compositeCheckBox, SWT.CHECK);
+        checkBoxSecond.setText("second");
+
+        Button checkBoxThird = new Button(compositeCheckBox, SWT.CHECK);
+        checkBoxThird.setText("third");
+
+        buttonChooseCheckBox.addSelectionListener(new SelectionAdapter() {
+            @Override
+            public void widgetSelected(SelectionEvent arg0) {
+                String stringInput = textChooseCheckBox.getText();
+
+                if (stringInput.equals(checkBoxFirst.getText())) {
+
+                    if (checkBoxFirst.getSelection()) {
+                        checkBoxFirst.setSelection(false);
+                    } else {
+                        checkBoxFirst.setSelection(true);
+                    }
+                    return;
+                }
+
+                if (stringInput.equals(checkBoxSecond.getText())) {
+
+                    if (checkBoxSecond.getSelection()) {
+                        checkBoxSecond.setSelection(false);
+                    } else {
+                        checkBoxSecond.setSelection(true);
+                    }
+                    return;
+                }
+
+                if (stringInput.equals(checkBoxThird.getText())) {
+
+                    if (checkBoxThird.getSelection()) {
+                        checkBoxThird.setSelection(false);
+                    } else {
+                        checkBoxThird.setSelection(true);
+                    }
+                    return;
+                }
+                MessageBox messageBoxError = new MessageBox(shell, SWT.OK);
+                messageBoxError.setText("Ошибка");
+                messageBoxError.setMessage("Кнопки с таким названием не найдено");
+                messageBoxError.open();
+            }
+        });
 
         buttonChoose.addSelectionListener(new SelectionAdapter() {
 
@@ -111,25 +178,28 @@ public class Main {
                 // TODO Auto-generated method stub
                 String chooseString = textChoose.getText();
 
-                if(chooseString.equals(firstRadio.getText())) {
+                if (chooseString.equals(firstRadio.getText())) {
                     firstRadio.setSelection(true);
                     secondRadio.setSelection(false);
                     thirdRadio.setSelection(false);
                     return;
                 }
-                if(chooseString.equals(secondRadio.getText())) {
+
+                if (chooseString.equals(secondRadio.getText())) {
                     firstRadio.setSelection(false);
                     secondRadio.setSelection(true);
                     thirdRadio.setSelection(false);
                     return;
                 }
-                if(chooseString.equals(thirdRadio.getText())) {
+
+                if (chooseString.equals(thirdRadio.getText())) {
                     firstRadio.setSelection(false);
                     secondRadio.setSelection(false);
                     thirdRadio.setSelection(true);
                     return;
                 }
-                MessageBox messageNotFound = new MessageBox(shell);
+
+                MessageBox messageNotFound = new MessageBox(shell, SWT.OK);
                 messageNotFound.setMessage("Кнопка с таким названием не найдена");
                 messageNotFound.setText("Ошибка");
                 messageNotFound.open();
@@ -144,12 +214,12 @@ public class Main {
                 String stringInput = textInput.getText();
                 String stringOutput = textOutput.getText();
 
-                if(stringInput.equals(stringOutput)){
+                if (stringInput.equals(stringOutput)) {
                     MessageBox messageEqualString = new MessageBox(shell, SWT.OK);
                     messageEqualString.setText("Ошибка");
                     messageEqualString.setMessage("Такая строка уже есть");
                     messageEqualString.open();
-                }else {
+                } else {
                     textOutput.setText(stringInput);
                 }
 
@@ -181,9 +251,8 @@ public class Main {
 
         shell.open();
 
-
-        while(!shell.isDisposed()){
-            if(display.readAndDispatch()) {
+        while (!shell.isDisposed()) {
+            if (display.readAndDispatch()) {
                 display.sleep();
             }
         }
